@@ -34,6 +34,10 @@ class IntegrationTest < Minitest::Test
     assert Document.tagged('biz-bar').all?(&include?('biz-bar'))
   end
 
+  def test_documents_including_underscore
+    assert Document.tagged('buz_biz').all?(&include?('buz_biz'))
+  end
+  
   def test_documents_using_symbol
     assert Document.tagged(:foo).all?(&include?('foo'))
   end
