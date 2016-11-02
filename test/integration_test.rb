@@ -3,7 +3,7 @@ require_relative 'test_helper'
 
 # Create all possible combinations of tags.
 4.times do |i|
-  %w(foo bar baz qux).combination(i + 1).each do |tags|
+  %w(foo bar baz qux biz-bar buz_biz).combination(i + 1).each do |tags|
     Document.create tags: tags
   end
 end
@@ -28,6 +28,14 @@ end
 class IntegrationTest < Minitest::Test
   def test_documents_including_foo
     assert Document.tagged('foo').all?(&include?('foo'))
+  end
+
+  def test_documents_including_dash
+    assert Document.tagged('biz-bar').all?(&include?('biz-bar'))
+  end
+
+  def test_documents_using_symbol
+    assert Document.tagged(:foo).all?(&include?('foo'))
   end
 
   def test_documents_including_at_least_foo
