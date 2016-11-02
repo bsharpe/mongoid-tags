@@ -27,7 +27,7 @@ module Mongoid
       #
       # @return [Hash] Hash which can be used as a Mongoid criteria
       def selector(query)
-        parsed_query = parser.parse(query)
+        parsed_query = parser.parse(query.to_s)
         raise Mongoid::Tags::Error, parser.failure_reason unless parsed_query
 
         parsed_query.to_criteria
